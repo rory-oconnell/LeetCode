@@ -2,30 +2,38 @@ from typing import List
 
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
+        # This will hold the final combinations
         res = []
+
+        # Mapping from digit to corresponding characters
         digitToChar = {
             "2": "abc",
             "3": "def",
             "4": "ghi",
             "5": "jkl",
             "6": "mno",
-            "7": "qprs",
+            "7": "pqrs",
             "8": "tuv",
             "9": "wxyz",
         }
 
+        # Function to perform backtracking
         def backtrack(i, curStr):
+            # If the current string length equals the digits length, add it to results
             if len(curStr) == len(digits):
                 res.append(curStr)
                 return
+            # Iterate over the possible characters for the current digit
             for c in digitToChar[digits[i]]:
                 backtrack(i + 1, curStr + c)
 
-        if digits:
+        # Start backtracking if the input string is not empty
+        if len(digits) > 0:
             backtrack(0, "")
 
         return res
-    
+
+# Example usage
 # 17. Letter Combinations of a Phone Number
 string = "23"
 print(Solution().letterCombinations(string))
